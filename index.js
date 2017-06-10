@@ -1,4 +1,5 @@
 var express = require('express');
+var requestIp = require('request-ip');
 
 var app = express();
 
@@ -7,7 +8,7 @@ app.get('/', function(req, res) {
 	var 	headers = req.headers,
 		lang = req.headers['accept-language'].slice(0, 5),
 		computer = req.headers['user-agent'].match(/\(([^)]+)\)/)[1],
-		ip = req.connection.remoteAddress.slice(7);
+		ip = requestIp.getClientIp(req).slice(7);//req.connection.remoteAddress.slice(7);
 	//res.send(require('util').inspect(req));
 	var ret = {
 		"language" : lang, 
